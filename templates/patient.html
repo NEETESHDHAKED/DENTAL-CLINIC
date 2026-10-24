@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head><title>Parcha</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:Arial;background:#F5F0E6;color:#222;padding:15px}
+.card{background:white;padding:15px;border-radius:20px;margin:10px 0;box-shadow:0 5px 15px rgba(0,0,0,0.08)}
+input{width:100%;padding:12px;margin:5px 0;border-radius:12px;border:none;background:#F0EDE6;color:#222}
+button{padding:13px;width:100%;border:none;border-radius:12px;font-weight:900}
+a{color:#007BFF;text-decoration:none;font-weight:bold}
+.row{background:#F0EDE6;padding:12px;border-radius:12px;margin:6px 0}
+.wa{background:#25D366;color:white;padding:12px;border-radius:12px;text-align:center;display:block;margin:10px 0}
+.print{background:#222;color:white;padding:12px;border-radius:12px;text-align:center;display:block}
+@media print{body{background:white} .no-print{display:none}}
+</style>
+</head>
+<body>
+<div class="no-print"><a href="/">⬅ BACK</a></div>
+<h1>🩺 {{p.name}} - {{p.age}}yr</h1>
+<p>{{p.phone}} | Problem: <b>{{p.problem}}</b></p>
+<div class="card" style="background:#007BFF;color:white"><h2 style="margin:0">Total Fees Diye: ₹{{p.total}}</h2><p>{{p.visits|length}} baar aaye</p></div>
+
+<div class="no-print">
+<a href="{{wa_link}}" target="_blank" class="wa">💬 WHATSAPP PE BHEJO - "Kal Aana Hai"</a>
+<a href="#" onclick="window.print()" class="print">🖨️ PARCHA PRINT / PDF</a>
+<div class="card">
+<h3>➕ NAYA VISIT - PARCHA LIKHO</h3>
+<form action="/visit/{{id}}" method="POST">
+<input name="dawa" placeholder="Dawa Ka Naam - Crocin, Azithro" required>
+<input name="fees" type="number" placeholder="Fees ₹ - 200" required>
+<input name="next_date" type="date" required>
+<input name="note" placeholder="Note - Aram karo, pani piyo">
+<button style="background:#007BFF;color:white">➕ PARCHA ADD KARO</button>
+</form>
+</div>
+</div>
+
+<h3>📋 PURA HISTORY</h3>
+{% for v in p.visits|reverse %}
+<div class="row"><b>{{v.date}}</b> | Next: {{v.next_date}}<br><b>Dawa:</b> {{v.dawa}}<br><b>Note:</b> {{v.note}}<br><b>Fees:</b> ₹{{v.fees}}</div>
+{% else %}<p>Abhi koi visit nahi</p>{% endfor %}
+<p style="text-align:center;color:#888">🙏 Dr Sharma Clinic - Jamwa Ramgarh - Get Well Soon</p>
+</body>
+</html>
