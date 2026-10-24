@@ -1,0 +1,10 @@
+flask
+pandas
+numpy
+scikit-learn
+nltk
+spacy
+PyPDF2
+python-docx
+pillow
+requests
